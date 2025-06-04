@@ -41,8 +41,8 @@ def summary_text(c, n, AQL, RQL):
 
     text = f""" <div align="center">
     <h2>Summary</h2>
-    <p style="font-size:18px">There is a  {100 * (1 - RQL):.2f}% chance the producer (Starlight) will reject the lot if its percentage defective is greater than {100*(1-AQL):.2f}%.<br>   
-    There is a {100 * consumers_risk:.2f}% chance the customer will accept the lot if it's quality if its percent defective is greater than {100*(1-RQL):.2f}% </p></div>
+    <p style="font-size:18px">There is a  {100 * (1 - producers_risk):.2f}% chance the producer (Starlight) will reject the lot if its percentage defective is greater than {100*(1-AQL):.2f}%.<br>   
+    There is a {100 * (1-consumers_risk):.2f}% chance the customer will accept the lot if it's quality if its percent defective is greater than {100*(1-RQL):.2f}% </p></div>
     """
     return text
 
