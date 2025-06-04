@@ -54,7 +54,7 @@ AQL_slider = pn.widgets.DiscreteSlider(name='AQL:',
                                        options=[.0001, .00015, .00025, .00065, .001, .0015, 
                                                 .0025, .004, .0065,.01,.015,.025,.04,.065,.1],
                                        value=.04)
-RQL_slider = pn.widgets.FloatSlider(name='RQL:', start=0.5, end=0.99, step=0.1, value=.9)
+RQL_slider = pn.widgets.FloatSlider(name='RQL:', start=0.5, end=0.99, step=0.001, value=.9)
 interactive_plot = pn.bind(plot, c=c_slider, n=n_slider, AQL=AQL_slider, RQL=RQL_slider, x_range=x_range_slider, y_range=y_range_slider)
 
 summary_pane = pn.bind(summary_text, c=c_slider, n=n_slider, AQL=AQL_slider, RQL=RQL_slider)
