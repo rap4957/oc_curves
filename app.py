@@ -37,12 +37,12 @@ def summary_text(c, n, AQL, RQL):
     # Calculate producer's and consumer's risks (example)
     Pa1 = stats.binom.cdf(c, n, LTPD)
     producers_risk = Pa1[max(np.where(LTPD <= AQL)[0])]
-    consumers_risk = LTPD[min(np.where(Pa1 <= 1 - RQL)[0])]
+    consumers_risk = LTPD[min(np.where(Pa1 <= (1 - RQL))[0])]
 
     text = f""" <div align="center">
     <h2>Summary</h2>
     <p style="font-size:18px">There is a  {100 * (1 - producers_risk):.2f}% chance the producer (Starlight) will reject the lot if its percentage defective is greater than {100*(1-AQL):.2f}%.<br>   
-    There is a {100 * (1-consumers_risk):.2f}% chance the customer will accept the lot if it's quality if its percent defective is greater than {100*(1-RQL):.2f}% </p></div>
+    There is a {100 * (1-RQL):.2f}% chance the customer will accept the lot if it's quality if its percent defective is greater than {100*(consumers_risk):.2f}% </p></div>
     """
     return text
 
@@ -54,7 +54,7 @@ AQL_slider = pn.widgets.DiscreteSlider(name='AQL:',
                                        options=[.0001, .00015, .00025, .00065, .001, .0015, 
                                                 .0025, .004, .0065,.01,.015,.025,.04,.065,.1],
                                        value=.04)
-RQL_slider = pn.widgets.FloatSlider(name='RQL:', start=0.5, end=0.99, step=0.001, value=.9)
+RQL_slider = pn.widgets.FloatSlider(name='RQL:', start=0.5, end=0.99, step=0.01, value=.9)
 interactive_plot = pn.bind(plot, c=c_slider, n=n_slider, AQL=AQL_slider, RQL=RQL_slider, x_range=x_range_slider, y_range=y_range_slider)
 
 summary_pane = pn.bind(summary_text, c=c_slider, n=n_slider, AQL=AQL_slider, RQL=RQL_slider)
